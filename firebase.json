@@ -1,11 +1,12 @@
 {
   "hosting": {
     "site": "tcplaesperanza",
-    "public": "public",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      ".github/**"
     ]
   }
 }
