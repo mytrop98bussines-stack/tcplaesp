@@ -1,0 +1,23 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main # O la rama que uses (ej. master)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código del repositorio
+      - name: Checkout el repositorio
+        uses: actions/checkout@v4
+
+      # 2. Desplegar en Firebase Hosting
+      - name: Desplegar en Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
