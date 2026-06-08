@@ -3,29 +3,24 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main # Cambia a master si es la que usas
+      - main # Si usas 'master', cambia 'main' por 'master'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Descargar el código del repositorio
       - name: Checkout el repositorio
         uses: actions/checkout@v4
 
-      # 2. Crear una carpeta limpia y mover los archivos web ahí
+      # Creamos la carpeta limpia para evitar el "unexpected error" de antes
       - name: Preparar carpeta de despliegue
         run: |
           mkdir -p _dist
-          # Copia el index.html y recursos esenciales (evita copiar configuraciones de Git/GitHub)
           cp index.html _dist/
-          # Si tienes carpetas de CSS, JS o imágenes en la raíz, descomenta las siguientes líneas:
-          # cp -r css _dist/ 2>/dev/null || true
-          # cp -r js _dist/ 2>/dev/null || true
-          # cp -r assets _dist/ 2>/dev/null || true
+          # Si tienes más archivos sueltos (como estilos.css), puedes listarlos aquí:
+          # cp estilos.css _dist/ 2>/dev/null || true
 
-      # 3. Desplegar en Firebase Hosting apuntando a esa carpeta limpia
       - name: Desplegar en Firebase
         uses: w9jds/firebase-action@master
         with:
