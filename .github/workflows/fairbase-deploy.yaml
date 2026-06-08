@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main # Si usas 'master', cambia 'main' por 'master'
+      - main # O 'master' si tu rama principal se llama así
 
 jobs:
   deploy:
@@ -13,14 +13,7 @@ jobs:
       - name: Checkout el repositorio
         uses: actions/checkout@v4
 
-      # Creamos la carpeta limpia para evitar el "unexpected error" de antes
-      - name: Preparar carpeta de despliegue
-        run: |
-          mkdir -p _dist
-          cp index.html _dist/
-          # Si tienes más archivos sueltos (como estilos.css), puedes listarlos aquí:
-          # cp estilos.css _dist/ 2>/dev/null || true
-
+      # Va directo a desplegar lo que encuentre según el firebase.json
       - name: Desplegar en Firebase
         uses: w9jds/firebase-action@master
         with:
